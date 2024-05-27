@@ -1,0 +1,189 @@
+openapi: 3.0.1
+
+info:
+  title: API Document of S3-assessment
+  description: All API of  staging available here.
+
+host: localhost:8000
+basePath: /
+schemes: [ http]
+
+consumes: [application/json]
+produces: [application/json]
+
+paths:
+  /bucket/add:
+    post:
+      tags: ["bucket"]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createBucketSchema"
+            examples:
+                request:
+                  value: |
+                      {
+                        "bucketName": "test2",
+                        "acl": "PUBLIC",
+                        "description":"test"
+                      }                                       
+      responses:
+        '200':
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponseSchema"
+              examples:
+                response:
+                  value: |
+                    {
+                        "bucketId": 1,
+                        "success": true
+                    }
+        '400':
+          description: There was an unexpected error. Please check the request and parameter
+        '504':
+          description: There was an unexpected error. Please check the request and parameter
+      parameters:
+        - in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              bucketName:
+                type: string
+              acl:
+                type: string
+              description:
+                type: string  
+      description: >-
+        create a new bucket
+  
+  /bucket/list:
+    get:
+      tags: ["bucket"]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getListOfBuckets'
+              examples:
+                response:
+                  value: |
+                    {
+                      "data": {
+                          "listOfBucket": [
+                              {
+                                  "bucket_id": 6,
+                                  "bucket_name": "test2",
+                                  "acl": "PUBLIC",
+                                  "description": "test",
+                                  "user_id": 1,
+                                  "created_ts": "2024-05-25T08:55:42.875Z"
+                              }
+                          ]
+                      },
+                    "success": true
+                    }
+                       
+        '401':
+          description: There was an unexpected error. Please check the request and parameter 
+        '504':
+          description: There was an unexpected error. Please check the request and parameter
+      parameters:
+        - name: pageNumber
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: sortOrder
+          in: query
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: created_ts   
+      description: >-
+        Get the list of buckets by userId
+
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Empty:
+      type: object
+      title: Empty Schema
+    
+    createBucketSchema:
+      type: object
+      properties:
+        bucketName:
+          type: string
+        acl:
+          type: string
+        description:
+          type: string
+
+    
+    SuccessResponseSchema:
+      type: object
+      properties:
+        bucketId:
+          type: integer
+        success:
+          type: boolean
+    
+    getListOfBuckets:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            listOfBucket:
+              type: array
+              items: 
+                type: object
+                properties:
+                  bucket_id:
+                    type: integre
+                  bucket_name:
+                    type: string
+                  acl:
+                    type: string
+                  description:
+                    type: string
+                  user_id:
+                    type: integre
+                  created_ts:
+                    type: string
+    
+        
+
+
+    
