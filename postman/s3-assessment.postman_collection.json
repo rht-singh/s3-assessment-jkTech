@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "0df457e7-fb97-447c-9556-c8e94647651f",
+		"name": "s3-assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27837467"
+	},
+	"item": [
+		{
+			"name": "bucket",
+			"item": [
+				{
+					"name": "post-bucket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bucketName\": \"test6\",\r\n    \"acl\": \"PUBLIC\",\r\n    \"description\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/bucket/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bucket",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getListOfBuckets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/bucket/list?pageSize=2&pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bucket",
+								"list"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "sortBy",
+									"value": "bucket_name",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "object",
+			"item": [
+				{
+					"name": "add object",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/saura/Videos/Captures/Slack - unknown-channel - Huddle 2023-09-01 12-56-36.mp4"
+								},
+								{
+									"key": "bucketName",
+									"value": "test1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/object/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"object",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getListOfObjects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/object/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"object",
+								"list"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBucketById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/object/8/test1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"object",
+								"8",
+								"test1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete object",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/object/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"object",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-object",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTcxNjc5MDE1MywiaWF0IjoxNzE2Nzg2NTUzfQ.SAiJdhZA4ulnMpTLAkfg7O8Tl5xAg6-elR1xB_sFI5w"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "test object",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/saura/Downloads/rohit-resume.pdf"
+								},
+								{
+									"key": "objectName",
+									"value": "my-resume",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/object/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"object",
+								"12"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
